@@ -1,0 +1,22 @@
+{
+  "name": "jquery-serializeJSON",
+  "version": "0.0.0",
+  "authors": [
+    "Paul Willoughby <paul@fivetide.com>"
+  ],
+  "description": "Convert form input values to a JSON object",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.0"
+  },
+  "devDependencies": {
+    "jasmine-jquery": "~1.7.0"
+  }
+}

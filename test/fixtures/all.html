@@ -1,0 +1,32 @@
+<form id="test-form" action="./" method="post">
+    <input type="text" name="txt" value="quux">
+    <input type="text" name="txtArray[]" value="quux0">
+    <input type="text" name="txtArray[]" value="quux1">
+    <input type="text" name="txtArray[]" value="quux2">
+    <input type="text" name="obArray[0][a]" value="0a">
+    <input type="text" name="obArray[1][a]" value="1a">
+    <input type="text" name="obArray[0][b]" value="0b">
+    <input type="text" name="obArray[0][c][d]" value="0d">
+    <textarea name="obArray[1][b]">1b</textarea>
+    <select name="opt">
+        <option>a</option>
+        <option>b</option>
+        <option selected>c</option>
+    </select>
+    <select name="optMultiple[]" multiple>
+        <option selected>a</option>
+        <option>b</option>
+        <option selected>c</option>
+    </select>
+    <select name="optWithValue">
+        <option value="23">a</option>
+        <option value="86">b</option>
+        <option value="65" selected>c</option>
+    </select>
+    <input type="radio" name="radio" value="A">
+    <input type="radio" name="radio" value="B" checked>
+    <input type="radio" name="radio" value="C">
+    <input type="checkbox" name="checkbox-one" value="A">
+    <input type="checkbox" name="checkbox-two" value="B" checked>
+    <input type="checkbox" name="checkbox-three" value="C">
+</form>

@@ -1,0 +1,22 @@
+{
+  "name": "jquery-serializeJSON",
+  "version": "0.0.0",
+  "description": "Serializes an HTML form to a JSON object",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "karma": "~0.12.1",
+    "karma-chrome-launcher": "~0.1.2",
+    "karma-firefox-launcher": "~0.1.3",
+    "karma-jasmine": "^0.1.5",
+    "karma-phantomjs-launcher": "~0.1.2",
+    "karma-script-launcher": "~0.1.0",
+    "karma-coverage": "^0.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paul Willoughby <paul@fivetide.com>",
+  "license": "MIT"
+}
