@@ -1,6 +1,6 @@
 {
   "name": "jquery-serializeJSON",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Serializes an HTML form to a JSON object",
   "directories": {
     "test": "test"
