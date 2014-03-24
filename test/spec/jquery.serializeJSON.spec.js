@@ -220,4 +220,113 @@ describe('jquery.serializeJSON plugin', function() {
             expect(data['checkbox-three']).not.toBeDefined();
         });
 	});
+
+    describe('given a collection of inputs not in a form', function() {
+        it('should work fine', function() {
+            var data = $('<input type="text" id="foo" name="foo" value="hello">' +
+                '<input type="text" id="bar" name="bar" value="world">' +
+                '<textarea id="fred" name="fred">wassup</textarea>'
+            ).serializeJSON();
+
+            expect(data.foo).toEqual('hello');
+            expect(data.bar).toEqual('world');
+            expect(data.fred).toEqual('wassup');
+        });
+    });
+
+    describe('excluding empty', function() {
+
+        it('should not add empty text inputs', function() {
+            $form = setFixtures('' +
+                '<form method="post">' +
+                    '<input type="text" name="foo" value="hello">' +
+                    '<input type="text" name="bar" value="        ">' +
+                    '<textarea name="fred">\n\n       </textarea>' +
+                '</form>' +
+            '').find('form');
+
+            var data = $form.serializeJSON({
+                excludeEmpty: true
+            });
+            expect(data.foo).toEqual('hello');
+            expect(data.bar).not.toBeDefined();
+            expect(data.fred).not.toBeDefined();
+        });
+
+        it('should not use checkboxes that are not checked', function() {
+            $form = setFixtures('' +
+                '<form method="post">' +
+                    '<input type="checkbox" name="foo" value="10">' +
+                '</form>' +
+            '').find('form');
+
+            var data = $form.serializeJSON({
+                excludeEmpty: true
+            });
+            expect(data.foo).not.toBeDefined();
+        });
+
+        it('should not include empty items in arrays', function() {
+            $form = setFixtures('' +
+                '<form method="post">' +
+                    '<input type="text" name="foo[]" value="hello">' +
+                    '<input type="text" name="foo[]" value="">' +
+                    '<textarea name="foo[]">wassup</textarea>' +
+                '</form>' +
+            '').find('form');
+
+            var data = $form.serializeJSON({
+                excludeEmpty: true
+            });
+            expect(data.foo).toEqual(['hello', 'wassup']);
+        });
+
+        it('should not create an array if all items are empty', function() {
+            $form = setFixtures('' +
+                '<form method="post">' +
+                    '<input type="text" name="foo[]" value="">' +
+                    '<input type="text" name="foo[]" value="">' +
+                '</form>' +
+            '').find('form');
+
+            var data = $form.serializeJSON({
+                excludeEmpty: true
+            });
+            expect(data.foo).not.toBeDefined();
+        });
+
+        it('should not create nested objects if all properties are empty', function() {
+            $form = setFixtures('' +
+                '<form method="post">' +
+                    '<input type="text" name="foo[a]" value="hello">' +
+                    '<input type="text" name="foo[bar][a]" value="">' +
+                    '<input type="text" name="foo[bar][b]" value="">' +
+                '</form>' +
+            '').find('form');
+
+            var data = $form.serializeJSON({
+                excludeEmpty: true
+            });
+            expect(data.foo.a).toEqual('hello');
+            expect(data.foo.bar).not.toBeDefined();
+        });
+
+        it('should create nested objects if there is something deeper', function() {
+            $form = setFixtures('' +
+                '<form method="post">' +
+                    '<input type="text" name="foo[a]" value="hello">' +
+                    '<input type="text" name="foo[bar][a]" value="">' +
+                    '<input type="text" name="foo[bar][b]" value="">' +
+                    '<input type="text" name="foo[bar][b][c]" value="hello">' +
+                '</form>' +
+            '').find('form');
+
+            var data = $form.serializeJSON({
+                excludeEmpty: true
+            });
+            expect(data.foo.a).toEqual('hello');
+            expect(data.foo.bar.b.c).toEqual('hello');
+        });
+    });
+
 });
