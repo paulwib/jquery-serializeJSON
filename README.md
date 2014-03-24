@@ -81,6 +81,22 @@ Result:
 }
 ```
 
+## Options
+
+Pass options as an object like:
+
+    $('#test-form').serializeJSON({
+        excludeEmpty: true
+    });
+
+### excludeEmpty `bool`
+
+Do not include empty fields in the resulting object, defaults to false.
+
+Excluding empty values can make validation agasint JSN schemas simpler (when using libraries like [tv4][]).
+
 ##Caveats
 
 If you have multiple inputs with the same name only the last value will be used. So if, for example, you want to have a multiple select it will need to have array brackets on the end of the name i.e. `<select name="things[]" multiple>`.
+
+[tv4]:https://github.com/geraintluff/tv4
